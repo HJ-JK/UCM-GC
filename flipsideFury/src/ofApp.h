@@ -1,10 +1,16 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofPlayer.h"
+#include "Carril.hpp"
 
 class ofApp : public ofBaseApp{
 
 	public:
+
+		int numLineas;
+		int anchoCarril;
+
 		void setup();
 		void update();
 		void draw();
@@ -20,5 +26,26 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+
+		// Metodo para establecer posiciones
+		void setPositions(vector<Carril *> vc);
+
+
+		// Posiciones
+		vector<Carril *> vectorCarriles;
+
+
+		// Definimos las lineas donde tendrá lugar el juego
+		
+		ofPolyline pl1, pl2, pl3, pl4, pl5;
+
+
+
+		ofPlayer player1;
+
+		ofVec2f pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8;
+
+
 		
 };
