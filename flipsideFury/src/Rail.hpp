@@ -2,16 +2,16 @@
 
 #include "ofMain.h"
 
-class Carril{
+class Rail{
 
 	public:
 		int id;
-		int ancho;
+		int width;
 		int pos; // 0 para superior, 1 para inferior
 		
-		Carril(int i, int p, int a) { // Constructor with parameters
+		Rail(int i, int p, int w) { // Constructor with parameters
 			id = i;
-			ancho = a;
+			width = w;
 			pos = p;
 		}
 };

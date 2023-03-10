@@ -4,8 +4,8 @@
 void ofApp::setup(){
 
 	// Definiciones principales
-	numLineas = 5;
-	anchoCarril = 25;
+	numLines= 5;
+	widthRail = 25;
 
 
 	// Creamos el escenario
@@ -97,27 +97,23 @@ void ofApp::gotMessage(ofMessage msg){
 
 }
 
-void ofApp::setPositions(vector<Carril*> vc)
-{
-}
-
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
 
 //--------------------------------------------------------------
-void ofApp::setPositions(vector<Carril *> vc) {
+void ofApp::setPositions(vector<Rail *> vc) {
 
 	int i;
 
-	vc.push_back(new Carril(0, 1, anchoCarril));
+	vc.push_back(new Rail(0, 1, widthRail));
 
-	for (i = 1; i < numLineas; i+2) {
-		vc.push_back(new Carril(i, 0, anchoCarril));
-		vc.push_back(new Carril(i+1, 1, anchoCarril));
+	for (i = 1; i < numLines; i+2) {
+		vc.push_back(new Rail(i, 0, widthRail));
+		vc.push_back(new Rail(i+1, 1, widthRail));
 	}
 
-	vc.push_back(new Carril(numLineas, 0, anchoCarril));
+	vc.push_back(new Rail(numLines, 0, widthRail));
 
 }

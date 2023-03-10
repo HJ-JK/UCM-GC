@@ -2,14 +2,14 @@
 
 #include "ofMain.h"
 #include "ofPlayer.h"
-#include "Carril.hpp"
+#include "Rail.hpp"
 
 class ofApp : public ofBaseApp{
 
 	public:
 
-		int numLineas;
-		int anchoCarril;
+		int numLines;
+		int widthRail;
 
 		void setup();
 		void update();
@@ -29,11 +29,11 @@ class ofApp : public ofBaseApp{
 
 
 		// Metodo para establecer posiciones
-		void setPositions(vector<Carril *> vc);
+		void setPositions(vector<Rail *> vc);
 
 
 		// Posiciones
-		vector<Carril *> vectorCarriles;
+		vector<Rail *> vecRail;
 
 
 		// Definimos las lineas donde tendrá lugar el juego
