@@ -29,8 +29,9 @@ class ofApp : public ofBaseApp{
 
 
 		// Metodo para establecer posiciones
-		void setPositions(vector<Rail *> vr, vector <Line *> vl);
-
+		void setRails(vector<Rail *> vr, vector <Line *> vl);
+		// Metodo para establecer lineas
+		vector <Line*> setLines(int numLines);
 
 		// Posiciones
 		vector<Rail *> vecRail;

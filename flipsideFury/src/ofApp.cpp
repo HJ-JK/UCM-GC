@@ -25,6 +25,9 @@ void ofApp::setup(){
 	pl5.lineTo(100, 500);
 	pl5.lineTo(1000, 500);
 
+	// Crear las lineas y los rails
+	vector <Line*> vl = setLines(numLines);
+	setRails(vecRail, vl);
 }
 
 //--------------------------------------------------------------
@@ -103,21 +106,28 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 //--------------------------------------------------------------
-void ofApp::setPositions(vector<Rail *> vr, vector <Line *> vl) {
+void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
 
 	int i; // iterator lines
 	int r = 0; // id rails
-
-	Line l;
-
-	vr.push_back(new Rail(r, 1, widthRail, )); // r = 0;
+ 
+	vr.push_back(new Rail(r, 1, widthRail, vl.fetch(0)); // r = 0;
 
 	for (i = 1; i < numLines-1; i) {
 		r++;
-		vr.push_back(new Rail(r, 0, widthRail));
+		vr.push_back(new Rail(r, 0, widthRail, vl.fetch(i)));
 		r++;
-		vr.push_back(new Rail(r, 1, widthRail));
+		vr.push_back(new Rail(r, 1, widthRail, vl.fetch(i)));
 	}
-	vr.push_back(new Rail(numLines, 0, widthRail));
+	vr.push_back(new Rail(numLines, 0, widthRail, vl.fetch(0)));
 
+}
+
+//--------------------------------------------------------------
+vector <Line*> ofApp::setLines(int numLines) {
+	vector <Line*> vl;
+	for (int i = 0; i < 10; i++) {
+		vl.push_back(new Line(i, 100*i));
+	}
+	return vl;
 }
