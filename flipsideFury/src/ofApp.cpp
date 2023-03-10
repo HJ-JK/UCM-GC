@@ -103,17 +103,21 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 //--------------------------------------------------------------
-void ofApp::setPositions(vector<Rail *> vc) {
+void ofApp::setPositions(vector<Rail *> vr, vector <Line *> vl) {
 
-	int i;
+	int i; // iterator lines
+	int r = 0; // id rails
 
-	vc.push_back(new Rail(0, 1, widthRail));
+	Line l;
 
-	for (i = 1; i < numLines; i+2) {
-		vc.push_back(new Rail(i, 0, widthRail));
-		vc.push_back(new Rail(i+1, 1, widthRail));
+	vr.push_back(new Rail(r, 1, widthRail, )); // r = 0;
+
+	for (i = 1; i < numLines-1; i) {
+		r++;
+		vr.push_back(new Rail(r, 0, widthRail));
+		r++;
+		vr.push_back(new Rail(r, 1, widthRail));
 	}
-
-	vc.push_back(new Rail(numLines, 0, widthRail));
+	vr.push_back(new Rail(numLines, 0, widthRail));
 
 }

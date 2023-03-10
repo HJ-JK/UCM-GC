@@ -29,7 +29,7 @@ class ofApp : public ofBaseApp{
 
 
 		// Metodo para establecer posiciones
-		void setPositions(vector<Rail *> vc);
+		void setPositions(vector<Rail *> vr, vector <Line *> vl);
 
 
 		// Posiciones
@@ -43,8 +43,6 @@ class ofApp : public ofBaseApp{
 
 
 		ofPlayer player1;
-
-		ofVec2f pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8;
 
 
 		
