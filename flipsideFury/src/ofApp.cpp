@@ -27,7 +27,7 @@ void ofApp::setup(){
 
 	// Crear las lineas y los rails
 	vector <Line*> vl = setLines(numLines);
-	setRails(vecRail, vl);
+	setRails(vr, vl);
 }
 
 //--------------------------------------------------------------
@@ -48,6 +48,14 @@ void ofApp::draw(){
 
 	
 
+}
+
+//--------------------------------------------------------------
+void ofApp::drawLines(vector <Line*> vl) {
+
+	for (Line* l : vl){
+		l->draw();
+	}
 }
 
 //--------------------------------------------------------------
@@ -111,15 +119,15 @@ void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
 	int i; // iterator lines
 	int r = 0; // id rails
  
-	vr.push_back(new Rail(r, 1, widthRail, vl.fetch(0)); // r = 0;
+	vr.push_back(new Rail(r, 1, widthRail, vl[0])); // r = 0;
 
 	for (i = 1; i < numLines-1; i) {
 		r++;
-		vr.push_back(new Rail(r, 0, widthRail, vl.fetch(i)));
+		vr.push_back(new Rail(r, 0, widthRail, vl[i]));
 		r++;
-		vr.push_back(new Rail(r, 1, widthRail, vl.fetch(i)));
+		vr.push_back(new Rail(r, 1, widthRail, vl[i]));
 	}
-	vr.push_back(new Rail(numLines, 0, widthRail, vl.fetch(0)));
+	vr.push_back(new Rail(numLines, 0, widthRail, vl[0]));
 
 }
 
@@ -127,7 +135,7 @@ void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
 vector <Line*> ofApp::setLines(int numLines) {
 	vector <Line*> vl;
 	for (int i = 0; i < 10; i++) {
-		vl.push_back(new Line(i, 100*i));
+		vl.push_back(new Line(i, 100 * i, 100*i, 1000));
 	}
 	return vl;
 }

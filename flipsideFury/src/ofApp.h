@@ -32,9 +32,11 @@ class ofApp : public ofBaseApp{
 		void setRails(vector<Rail *> vr, vector <Line *> vl);
 		// Metodo para establecer lineas
 		vector <Line*> setLines(int numLines);
+		// Metodo draw lines
+		void drawLines(vector <Line*> vl);
 
 		// Posiciones
-		vector<Rail *> vecRail;
+		vector<Rail *> vr;
 
 
 		// Definimos las lineas donde tendrá lugar el juego

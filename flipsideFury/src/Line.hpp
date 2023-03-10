@@ -2,15 +2,20 @@
 
 #include "ofMain.h"
 
-class Line{
+class Line : public ofBaseApp {
 
 	public:
 		int id;
-		int pos; // 0 para superior, 1 para inferior
+		int x; // 0 para superior, 1 para inferior
+		int y;
+		int lon;
 		
-		Line(int i = 1, int p = 3) { // Constructor with parameters (TODO quitar valores default)
+		Line(int i, int x, int y, int lon) { // Constructor with parameters
 			id = i;
-			pos = p;
-
+			x = x;
+			y = y;
 		}
+		void draw();
+
+		ofPolyline line;
 };
