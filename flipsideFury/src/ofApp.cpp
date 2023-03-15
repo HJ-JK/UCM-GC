@@ -6,27 +6,14 @@ void ofApp::setup(){
 	// Definiciones principales
 	numLines= 5;
 	widthRail = 25;
+	x_init = 100;
+	x_lon = 800;
+	y_init = 100;
 
 
-	// Creamos el escenario
-
-	pl1.lineTo(100, 100);
-	pl1.lineTo(1000, 100);
-
-	pl2.lineTo(100, 200);
-	pl2.lineTo(1000, 200);
-
-	pl3.lineTo(100, 300);
-	pl3.lineTo(1000, 300);
-
-	pl4.lineTo(100, 400);
-	pl4.lineTo(1000, 400);
-
-	pl5.lineTo(100, 500);
-	pl5.lineTo(1000, 500);
 
 	// Crear las lineas y los rails
-	vector <Line*> vl = setLines(numLines);
+	vl = setLines(numLines);
 	setRails(vr, vl);
 }
 
@@ -38,13 +25,18 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
+	/*
 	pl1.draw();
 	pl2.draw();
 	pl3.draw();
 	pl4.draw();
 	pl5.draw();
+	*/
 
 	player1.draw();
+
+	drawLines(vl);
+	
 
 	
 
@@ -122,7 +114,7 @@ void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
  
 	vr.push_back(new Rail(r, 1, widthRail, vl[0])); // r = 0;
 
-	for (i = 1; i < numLines-1; i) {
+	for (i = 1; i < numLines-1; i++) {
 		r++;
 		vr.push_back(new Rail(r, 0, widthRail, vl[i]));
 		r++;
@@ -148,9 +140,10 @@ void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
 
 //--------------------------------------------------------------
 vector <Line*> ofApp::setLines(int numLines) {
-	vector <Line*> vl;
-	for (int i = 0; i < 10; i++) {
-		vl.push_back(new Line(i, 100 * i, 100*i, 1000));
+
+	for (int i = 0; i < numLines; i++) {
+
+		vl.push_back(new Line(i, x_init, y_init*(i+1), x_lon));
 	}
 	return vl;
 }

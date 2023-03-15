@@ -10,6 +10,9 @@ class ofApp : public ofBaseApp{
 
 		int numLines;
 		int widthRail;
+		int x_init;
+		int x_lon;
+		int y_init;
 
 		void setup();
 		void update();
@@ -37,6 +40,9 @@ class ofApp : public ofBaseApp{
 
 		// Posiciones
 		vector<Rail *> vr;
+
+		// Lineas
+		vector <Line*> vl;
 
 
 		// Definimos las lineas donde tendrá lugar el juego

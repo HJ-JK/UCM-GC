@@ -3,7 +3,9 @@
 
 void Line::draw() {
 
-	line.lineTo(x, y);
-	line.lineTo(x+lon, y);
+	poli.lineTo(x, y);
+	poli.lineTo(x+lon, y);
+
+	poli.draw();
 	
 }
