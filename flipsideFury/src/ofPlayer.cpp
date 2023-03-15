@@ -14,7 +14,8 @@ void ofPlayer::update(){
 //--------------------------------------------------------------
 void ofPlayer::draw(){
 
-
+    ofDrawCircle(250, 125, 0, 25);
 	ofDrawCircle(150, 125, 0, 25);
+    
 
 }

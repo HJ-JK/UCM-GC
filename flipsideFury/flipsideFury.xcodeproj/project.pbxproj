@@ -456,7 +456,7 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>5FABFC51D19776BA737F6EBB</key>
+			<key>5A25BAA2D8F7F857B5C58A6F</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.c.h</string>
@@ -465,9 +465,24 @@
 				<key>isa</key>
 				<string>PBXFileReference</string>
 				<key>name</key>
-				<string>Carril.hpp</string>
+				<string>Rail.hpp</string>
 				<key>path</key>
-				<string>src/Carril.hpp</string>
+				<string>src/Rail.hpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>96BA0B8C7C9921D2BCA4E6C1</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>Line.hpp</string>
+				<key>path</key>
+				<string>src/Line.hpp</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
@@ -483,6 +498,28 @@
 				<string>ofPlayer.h</string>
 				<key>path</key>
 				<string>src/ofPlayer.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>505538B18412425F078204B2</key>
+			<dict>
+				<key>fileRef</key>
+				<string>DCCDD55A635284F65B045B02</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>DCCDD55A635284F65B045B02</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>4</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>Rail.cpp</string>
+				<key>path</key>
+				<string>src/Rail.cpp</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
@@ -508,14 +545,14 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
-			<key>D0FE061D19BA2A847F36F450</key>
+			<key>143B47270404C981E9C3EB64</key>
 			<dict>
 				<key>fileRef</key>
-				<string>75B9141AA776382762165F85</string>
+				<string>E26359B3F76DB6C94AF4C692</string>
 				<key>isa</key>
 				<string>PBXBuildFile</string>
 			</dict>
-			<key>75B9141AA776382762165F85</key>
+			<key>E26359B3F76DB6C94AF4C692</key>
 			<dict>
 				<key>explicitFileType</key>
 				<string>sourcecode.cpp.cpp</string>
@@ -524,9 +561,9 @@
 				<key>isa</key>
 				<string>PBXFileReference</string>
 				<key>name</key>
-				<string>Carril.cpp</string>
+				<string>Line.cpp</string>
 				<key>path</key>
-				<string>src/Carril.cpp</string>
+				<string>src/Line.cpp</string>
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
@@ -3633,8 +3670,9 @@ fi
 				<array>
 					<string>E4B69E200A3A1BDC003C02F2</string>
 					<string>E4B69E210A3A1BDC003C02F2</string>
-					<string>D0FE061D19BA2A847F36F450</string>
+					<string>143B47270404C981E9C3EB64</string>
 					<string>AFC4166B2E1252F72CD0FAEF</string>
+					<string>505538B18412425F078204B2</string>
 					<string>EBD650A74B46A8B7260C6F2B</string>
 					<string>D62782A3E961B7531B96DF69</string>
 					<string>2472ACDBC976B4D66B448EFE</string>
@@ -3837,10 +3875,12 @@ fi
 					<string>E4B69E1D0A3A1BDC003C02F2</string>
 					<string>E4B69E1E0A3A1BDC003C02F2</string>
 					<string>E4B69E1F0A3A1BDC003C02F2</string>
-					<string>75B9141AA776382762165F85</string>
+					<string>E26359B3F76DB6C94AF4C692</string>
 					<string>74AF2023D0A5E331F4D848A6</string>
+					<string>DCCDD55A635284F65B045B02</string>
 					<string>26528893A197B3EB094DE864</string>
-					<string>5FABFC51D19776BA737F6EBB</string>
+					<string>96BA0B8C7C9921D2BCA4E6C1</string>
+					<string>5A25BAA2D8F7F857B5C58A6F</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
