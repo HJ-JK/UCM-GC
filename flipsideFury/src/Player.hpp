@@ -20,5 +20,8 @@ class Player{
 		void setup();
 		void update();
 		void draw();
+
+		void setRail(Rail* newRail);
+		Rail* getRail();
 		
 };

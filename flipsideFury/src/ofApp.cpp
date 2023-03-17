@@ -16,9 +16,8 @@ void ofApp::setup(){
 	vl = setLines(numLines);
 	setRails(vr, vl);
 
-
-	//Player player_aux(0,0,vr[0]);
-	//player1 = player_aux;
+	// vr no funciona
+	Player player1(1,0,vr[1]);
 }
 
 //--------------------------------------------------------------
@@ -28,6 +27,19 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	// Mover el jugador 1
+	Rail* current_rail1 = player1.getRail();
+	int num_rail = current_rail1->id;
+
+	//if (num_rail != 0 && num_rail != 2* numLines - 2) {
+
+	//}
+	if (ofGetKeyPressed('s')) {
+		player1.setRail(vr[num_rail--]);
+	}
+	else if (ofGetKeyPressed('x')) {
+		player1.setRail(vr[num_rail++]);
+	}
 
 	player1.draw();
 

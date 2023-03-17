@@ -21,3 +21,13 @@ void Player::draw(){
     
 
 }
+
+//--------------------------------------------------------------
+void Player::setRail(Rail* newRail) {
+    position = newRail;
+}
+
+//--------------------------------------------------------------
+Rail* Player::getRail() {
+    return position;
+}
