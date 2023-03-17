@@ -25,21 +25,9 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	/*
-	pl1.draw();
-	pl2.draw();
-	pl3.draw();
-	pl4.draw();
-	pl5.draw();
-	*/
-
 	player1.draw();
 
 	drawLines(vl);
-	
-
-	
-
 }
 
 //--------------------------------------------------------------
@@ -110,31 +98,16 @@ void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
 
 	int i; // iterator lines
 	int r = 0; // id rails
-<<<<<<< Updated upstream
- 
-	vr.push_back(new Rail(r, 1, widthRail, vl[0])); // r = 0;
+
+	vr.push_back(new Rail(r, 1, widthRail, vl[0]->y + 25, vl[0])); // r = 0;
 
 	for (i = 1; i < numLines-1; i++) {
 		r++;
-		vr.push_back(new Rail(r, 0, widthRail, vl[i]));
+		vr.push_back(new Rail(r, 0, widthRail, vl[i]->y - 25, vl[i]));
 		r++;
-		vr.push_back(new Rail(r, 1, widthRail, vl[i]));
+		vr.push_back(new Rail(r, 1, widthRail, vl[i]->y + 25, vl[i]));
 	}
-	vr.push_back(new Rail(numLines, 0, widthRail, vl[0]));
-=======
-
-	Line l;
-
-	vr.push_back(new Rail(r, 1, widthRail, l)); // r = 0;
-
-	for (i = 1; i < numLines-1; i) {
-		r++;
-		vr.push_back(new Rail(r, 0, widthRail, l));
-		r++;
-		vr.push_back(new Rail(r, 1, widthRail, l));
-	}
-	vr.push_back(new Rail(numLines, 0, widthRail, l));
->>>>>>> Stashed changes
+	vr.push_back(new Rail(r, 0, widthRail, vl[numLines-1]->y - 25, vl[numLines-1]));
 
 }
 
