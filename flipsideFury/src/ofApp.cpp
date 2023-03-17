@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+	bool pressed_s = false;
+	bool pressed_x = false;
+
 	// Definiciones principales
 	numLines= 5;
 	widthRail = 25;
@@ -14,34 +17,71 @@ void ofApp::setup(){
 
 	// Crear las lineas y los rails
 	vl = setLines(numLines);
-	setRails(vr, vl);
+	setRails(vl);
 
-	// vr no funciona
-	Player player1(1,0,vr[1]);
+	player1.setId(0);
+	player1.setPoints(0);
+	player1.setRail(vr[1]);
+	player1.position->occupied = true;
+
+	player2.setId(1);
+	player2.setPoints(0);
+	player2.setRail(vr[6]);
+	player2.position->occupied = true;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::draw(){
 	// Mover el jugador 1
 	Rail* current_rail1 = player1.getRail();
 	int num_rail = current_rail1->id;
 
-	//if (num_rail != 0 && num_rail != 2* numLines - 2) {
-
-	//}
 	if (ofGetKeyPressed('s')) {
-		player1.setRail(vr[num_rail--]);
+
+		if (pressed_s){
+			if (num_rail <= 0 && vr[vr.size() - 1]->occupied==false) {
+				vr[num_rail]->occupied = false;
+				player1.setRail(vr[vr.size() - 1]);
+				player1.position->occupied = true;
+			}
+			else if (vr[num_rail - 1]->occupied==false) {
+				vr[num_rail]->occupied = false;
+				player1.setRail(vr[num_rail - 1]);
+				player1.position->occupied = true;
+			}
+		}
+		pressed_s = false;
+	
 	}
-	else if (ofGetKeyPressed('x')) {
-		player1.setRail(vr[num_rail++]);
+    if (ofGetKeyPressed('x')) {
+
+		if (pressed_x) {
+			if (num_rail >= vr.size() - 1 && vr[0]->occupied==false) {
+				vr[num_rail]->occupied = false;
+				player1.setRail(vr[0]);
+				player1.position->occupied = true;
+			}
+			else if(vr[num_rail + 1]->occupied==false) {
+				vr[num_rail]->occupied = false;
+				player1.setRail(vr[num_rail + 1]);
+				player1.position->occupied = true;
+			}
+		}
+
+		pressed_x = false;
+			
 	}
+	
+
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+
 
 	player1.draw();
+	player2.draw();
 
 	drawLines(vl);
 }
@@ -57,10 +97,25 @@ void ofApp::drawLines(vector <Line*> vl) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+	if (key == 's') {
+		pressed_s = true;
+	}
+	if (key == 'x') {
+		pressed_x = true;
+	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+
+	if (key == 's') {
+		pressed_s = false;
+	}
+	if (key == 'x') {
+		pressed_x = false;
+	}
+
 
 }
 
@@ -110,22 +165,23 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 //--------------------------------------------------------------
-void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
+void ofApp::setRails( vector <Line *> vl) {
 
 	int i; // iterator lines
 	int r = 0; // id rails
 
 
-	vr.push_back(new Rail(r, 1, widthRail, vl[0]->y + 25, vl[0])); // r = 0;
+	vr.push_back(new Rail(r, 1, widthRail, vl[0]->y + 25, false, vl[0])); // r = 0;
 
 
 	for (i = 1; i < numLines-1; i++) {
 		r++;
-		vr.push_back(new Rail(r, 0, widthRail, vl[i]->y - 25, vl[i]));
+		vr.push_back(new Rail(r, 0, widthRail, vl[i]->y - 25, false, vl[i]));
 		r++;
-		vr.push_back(new Rail(r, 1, widthRail, vl[i]->y + 25, vl[i]));
+		vr.push_back(new Rail(r, 1, widthRail, vl[i]->y + 25, false, vl[i]));
 	}
-	vr.push_back(new Rail(r, 0, widthRail, vl[numLines-1]->y - 25, vl[numLines-1]));
+	r++;
+	vr.push_back(new Rail(r, 0, widthRail, vl[numLines-1]->y - 25, false, vl[numLines-1]));
 
 
 }

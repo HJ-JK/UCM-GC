@@ -21,7 +21,15 @@ class Player{
 		void update();
 		void draw();
 
+		void setId(int newId);
+		int getId();
+
+		void setPoints(int newPoints);
+		int getPoints();
+
 		void setRail(Rail* newRail);
 		Rail* getRail();
+
+		
 		
 };

@@ -14,6 +14,9 @@ class ofApp : public ofBaseApp{
 		int x_lon;
 		int y_init;
 
+		bool pressed_s;
+		bool pressed_x;
+
 		void setup();
 		void update();
 		void draw();
@@ -32,7 +35,7 @@ class ofApp : public ofBaseApp{
 
 
 		// Metodo para establecer posiciones
-		void setRails(vector<Rail *> vr, vector <Line *> vl);
+		void setRails(vector <Line *> vl);
 		// Metodo para establecer lineas
 		vector <Line*> setLines(int numLines);
 		// Metodo draw lines
@@ -45,4 +48,5 @@ class ofApp : public ofBaseApp{
 		vector <Line*> vl;
 
 		Player player1;
+		Player player2;
 };

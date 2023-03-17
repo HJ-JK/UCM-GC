@@ -17,12 +17,12 @@ class Obstacle{
         int type;
         int x_coord;
 
-        Rail* line;
+        Rail* rail;
         
-        Obstacle(int t, int x, Rail* Rail) { // Constructor with parameters
+        Obstacle(int t, int x, Rail* r) { // Constructor with parameters
             type = t;
             x_coord = x;
-            line = l;
+            rail = r;
         }
     
     void draw();
