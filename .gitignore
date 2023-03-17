@@ -99,3 +99,6 @@ Project.xcconfig
 
 Makefile
 config.make
+
+flipsideFury/Makefile
+flipsideFury/config.make
