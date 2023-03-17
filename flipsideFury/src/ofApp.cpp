@@ -15,6 +15,10 @@ void ofApp::setup(){
 	// Crear las lineas y los rails
 	vl = setLines(numLines);
 	setRails(vr, vl);
+
+
+	//Player player_aux(0,0,vr[0]);
+	//player1 = player_aux;
 }
 
 //--------------------------------------------------------------
@@ -99,7 +103,9 @@ void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
 	int i; // iterator lines
 	int r = 0; // id rails
 
+
 	vr.push_back(new Rail(r, 1, widthRail, vl[0]->y + 25, vl[0])); // r = 0;
+
 
 	for (i = 1; i < numLines-1; i++) {
 		r++;
@@ -108,6 +114,7 @@ void ofApp::setRails(vector<Rail *> vr, vector <Line *> vl) {
 		vr.push_back(new Rail(r, 1, widthRail, vl[i]->y + 25, vl[i]));
 	}
 	vr.push_back(new Rail(r, 0, widthRail, vl[numLines-1]->y - 25, vl[numLines-1]));
+
 
 }
 

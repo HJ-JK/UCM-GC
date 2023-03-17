@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 
-class Line : public ofBaseApp {
+class Line {
 
 	public:
 		int id;

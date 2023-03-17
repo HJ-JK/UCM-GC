@@ -1,18 +1,20 @@
-#include "ofPlayer.h"
+#include "Player.hpp"
+
 
 //--------------------------------------------------------------
-void ofPlayer::setup(){
+void Player::setup(){
+
 
 
 }
 
 //--------------------------------------------------------------
-void ofPlayer::update(){
+void Player::update(){
 
 }
 
 //--------------------------------------------------------------
-void ofPlayer::draw(){
+void Player::draw(){
 
     ofDrawCircle(250, 125, 0, 25);
 	ofDrawCircle(150, 125, 0, 25);

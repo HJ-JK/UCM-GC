@@ -1,4 +1,3 @@
-#include "ofPlayer.h"
 #include "Line.hpp"
 
 void Line::draw() {

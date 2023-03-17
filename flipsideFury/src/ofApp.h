@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofPlayer.h"
+#include "Player.hpp"
 #include "Rail.hpp"
 
 class ofApp : public ofBaseApp{
@@ -44,15 +44,5 @@ class ofApp : public ofBaseApp{
 		// Lineas
 		vector <Line*> vl;
 
-
-		// Definimos las lineas donde tendrá lugar el juego
-		
-		ofPolyline pl1, pl2, pl3, pl4, pl5;
-
-
-
-		ofPlayer player1;
-
-
-		
+		Player player1;
 };
