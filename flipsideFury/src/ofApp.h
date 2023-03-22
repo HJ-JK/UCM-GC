@@ -17,6 +17,9 @@ class ofApp : public ofBaseApp{
 		bool pressed_s;
 		bool pressed_x;
 
+		bool pressed_j;
+		bool pressed_n;
+
 		void setup();
 		void update();
 		void draw();

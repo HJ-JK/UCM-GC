@@ -5,6 +5,8 @@ void ofApp::setup(){
 
 	bool pressed_s = false;
 	bool pressed_x = false;
+	bool pressed_j = false;
+	bool pressed_n = false;
 
 	// Definiciones principales
 	numLines= 5;
@@ -35,19 +37,19 @@ void ofApp::update(){
 
 	// Mover el jugador 1
 	Rail* current_rail1 = player1.getRail();
-	int num_rail = current_rail1->id;
+	int num_rail1 = current_rail1->id;
 
 	if (ofGetKeyPressed('s')) {
 
 		if (pressed_s){
-			if (num_rail <= 0 && vr[vr.size() - 1]->occupied==false) {
-				vr[num_rail]->occupied = false;
+			if (num_rail1 <= 0 && vr[vr.size() - 1]->occupied==false) {
+				vr[num_rail1]->occupied = false;
 				player1.setRail(vr[vr.size() - 1]);
 				player1.position->occupied = true;
 			}
-			else if (vr[num_rail - 1]->occupied==false) {
-				vr[num_rail]->occupied = false;
-				player1.setRail(vr[num_rail - 1]);
+			else if (vr[num_rail1 - 1]->occupied==false) {
+				vr[num_rail1]->occupied = false;
+				player1.setRail(vr[num_rail1 - 1]);
 				player1.position->occupied = true;
 			}
 		}
@@ -57,20 +59,59 @@ void ofApp::update(){
     if (ofGetKeyPressed('x')) {
 
 		if (pressed_x) {
-			if (num_rail >= vr.size() - 1 && vr[0]->occupied==false) {
-				vr[num_rail]->occupied = false;
+			if (num_rail1 >= vr.size() - 1 && vr[0]->occupied==false) {
+				vr[num_rail1]->occupied = false;
 				player1.setRail(vr[0]);
 				player1.position->occupied = true;
 			}
-			else if(vr[num_rail + 1]->occupied==false) {
-				vr[num_rail]->occupied = false;
-				player1.setRail(vr[num_rail + 1]);
+			else if(vr[num_rail1 + 1]->occupied==false) {
+				vr[num_rail1]->occupied = false;
+				player1.setRail(vr[num_rail1 + 1]);
 				player1.position->occupied = true;
 			}
 		}
-
 		pressed_x = false;
 			
+	}
+
+
+	// Mover el jugador 2
+	Rail* current_rail2 = player2.getRail();
+	int num_rail2 = current_rail2->id;
+
+	if (ofGetKeyPressed('j')) {
+
+		if (pressed_j) {
+			if (num_rail2 <= 0 && vr[vr.size() - 1]->occupied == false) {
+				vr[num_rail2]->occupied = false;
+				player2.setRail(vr[vr.size() - 1]);
+				player2.position->occupied = true;
+			}
+			else if (vr[num_rail2 - 1]->occupied == false) {
+				vr[num_rail2]->occupied = false;
+				player2.setRail(vr[num_rail2 - 1]);
+				player2.position->occupied = true;
+			}
+		}
+		pressed_j = false;
+
+	}
+	if (ofGetKeyPressed('n')) {
+
+		if (pressed_n) {
+			if (num_rail2 >= vr.size() - 1 && vr[0]->occupied == false) {
+				vr[num_rail2]->occupied = false;
+				player2.setRail(vr[0]);
+				player2.position->occupied = true;
+			}
+			else if (vr[num_rail2 + 1]->occupied == false) {
+				vr[num_rail2]->occupied = false;
+				player2.setRail(vr[num_rail2 + 1]);
+				player2.position->occupied = true;
+			}
+		}
+		pressed_n = false;
+
 	}
 	
 
@@ -79,10 +120,12 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-
+	ofSetColor(ofColor::indianRed);
 	player1.draw();
+	ofSetColor(ofColor::cornflowerBlue);
 	player2.draw();
-
+	
+	ofSetColor(ofColor::white);
 	drawLines(vl);
 }
 
@@ -103,7 +146,12 @@ void ofApp::keyPressed(int key){
 	if (key == 'x') {
 		pressed_x = true;
 	}
-
+	if (key == 'j') {
+		pressed_j = true;
+	}
+	if (key == 'n') {
+		pressed_n = true;
+	}
 }
 
 //--------------------------------------------------------------
@@ -114,6 +162,12 @@ void ofApp::keyReleased(int key){
 	}
 	if (key == 'x') {
 		pressed_x = false;
+	}
+	if (key == 'j') {
+		pressed_j = false;
+	}
+	if (key == 'n') {
+		pressed_n = false;
 	}
 
 
