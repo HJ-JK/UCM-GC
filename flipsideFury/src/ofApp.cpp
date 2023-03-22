@@ -37,11 +37,11 @@ void ofApp::update(){
 
 	// Mover el jugador 1
 	Rail* current_rail1 = player1.getRail();
-	int num_rail1 = current_rail1->id;
+	double num_rail1 = current_rail1->id;
 
 	if (ofGetKeyPressed('s')) {
 
-		if (pressed_s){
+		if (!pressed_s){
 			if (num_rail1 <= 0 && vr[vr.size() - 1]->occupied==false) {
 				vr[num_rail1]->occupied = false;
 				player1.setRail(vr[vr.size() - 1]);
@@ -52,13 +52,16 @@ void ofApp::update(){
 				player1.setRail(vr[num_rail1 - 1]);
 				player1.position->occupied = true;
 			}
-		}
-		pressed_s = false;
-	
+			pressed_s = true;
+		}	
 	}
+	else {
+		pressed_s = false;
+	}
+
     if (ofGetKeyPressed('x')) {
 
-		if (pressed_x) {
+		if (!pressed_x) {
 			if (num_rail1 >= vr.size() - 1 && vr[0]->occupied==false) {
 				vr[num_rail1]->occupied = false;
 				player1.setRail(vr[0]);
@@ -69,19 +72,20 @@ void ofApp::update(){
 				player1.setRail(vr[num_rail1 + 1]);
 				player1.position->occupied = true;
 			}
-		}
-		pressed_x = false;
-			
+			pressed_x = true;
+		}		
 	}
-
+	else {
+		pressed_x = false;
+	}
 
 	// Mover el jugador 2
 	Rail* current_rail2 = player2.getRail();
-	int num_rail2 = current_rail2->id;
+	double num_rail2 = current_rail2->id;
 
 	if (ofGetKeyPressed('j')) {
 
-		if (pressed_j) {
+		if (!pressed_j) {
 			if (num_rail2 <= 0 && vr[vr.size() - 1]->occupied == false) {
 				vr[num_rail2]->occupied = false;
 				player2.setRail(vr[vr.size() - 1]);
@@ -92,13 +96,16 @@ void ofApp::update(){
 				player2.setRail(vr[num_rail2 - 1]);
 				player2.position->occupied = true;
 			}
+			pressed_j = true;
 		}
-		pressed_j = false;
-
 	}
+	else {
+		pressed_j = false;
+	}
+
 	if (ofGetKeyPressed('n')) {
 
-		if (pressed_n) {
+		if (!pressed_n) {
 			if (num_rail2 >= vr.size() - 1 && vr[0]->occupied == false) {
 				vr[num_rail2]->occupied = false;
 				player2.setRail(vr[0]);
@@ -109,9 +116,11 @@ void ofApp::update(){
 				player2.setRail(vr[num_rail2 + 1]);
 				player2.position->occupied = true;
 			}
+			pressed_n = true;
 		}
+	}
+	else {
 		pressed_n = false;
-
 	}
 	
 
@@ -140,36 +149,10 @@ void ofApp::drawLines(vector <Line*> vl) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
-	if (key == 's') {
-		pressed_s = true;
-	}
-	if (key == 'x') {
-		pressed_x = true;
-	}
-	if (key == 'j') {
-		pressed_j = true;
-	}
-	if (key == 'n') {
-		pressed_n = true;
-	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
-	if (key == 's') {
-		pressed_s = false;
-	}
-	if (key == 'x') {
-		pressed_x = false;
-	}
-	if (key == 'j') {
-		pressed_j = false;
-	}
-	if (key == 'n') {
-		pressed_n = false;
-	}
-
 
 }
 
