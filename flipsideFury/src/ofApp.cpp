@@ -28,6 +28,8 @@ void ofApp::setup(){
 	player2.setPoints(0);
 	player2.setRail(vr[6]);
 	player2.position->occupied = true;
+    
+    Obstacle1.setRail(vr[1]);
 }
 
 //--------------------------------------------------------------
@@ -82,6 +84,9 @@ void ofApp::draw(){
 
 	player1.draw();
 	player2.draw();
+    ofPushMatrix();
+    Obstacle1.draw();
+    ofPopMatrix();
 
 	drawLines(vl);
 }

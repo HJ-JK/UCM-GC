@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Player.hpp"
 #include "Rail.hpp"
+#include "Obstacle.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -49,4 +50,6 @@ class ofApp : public ofBaseApp{
 
 		Player player1;
 		Player player2;
+        
+        Obstacle Obstacle1;
 };

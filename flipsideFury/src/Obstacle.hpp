@@ -18,7 +18,7 @@ class Obstacle{
         int x_coord;
 
         Rail* rail;
-        
+        Obstacle(){};
         Obstacle(int t, int x, Rail* r) { // Constructor with parameters
             type = t;
             x_coord = x;
@@ -26,6 +26,8 @@ class Obstacle{
         }
     
     void draw();
+    void setRail(Rail* newRail);
+    Rail* getRail();
 };
 
 #endif /* Obstacle_hpp */
