@@ -37,20 +37,24 @@ void ofApp::update(){
 
 	// Mover el jugador 1
 	Rail* current_rail1 = player1.getRail();
-	double num_rail1 = current_rail1->id;
+	int num_rail1 = current_rail1->id;
 
 	if (ofGetKeyPressed('s')) {
 
-		if (!pressed_s){
-			if (num_rail1 <= 0 && vr[vr.size() - 1]->occupied==false) {
-				vr[num_rail1]->occupied = false;
-				player1.setRail(vr[vr.size() - 1]);
-				player1.position->occupied = true;
+		if (!pressed_s && !pressed_x){ // if S wasnt pressed
+			if (num_rail1 <= 0) { // If player is on rail 0
+				if (vr[vr.size() - 1]->occupied == false) { // if last rail is free
+					vr[num_rail1]->occupied = false;
+					player1.setRail(vr[vr.size() - 1]);
+					player1.position->occupied = true;
+				}	
 			}
-			else if (vr[num_rail1 - 1]->occupied==false) {
-				vr[num_rail1]->occupied = false;
-				player1.setRail(vr[num_rail1 - 1]);
-				player1.position->occupied = true;
+			else{ // if player isnt on rail 0
+				if (vr[num_rail1 - 1]->occupied == false) { //if rail above is free
+					vr[num_rail1]->occupied = false;
+					player1.setRail(vr[num_rail1 - 1]);
+					player1.position->occupied = true;
+				}	
 			}
 			pressed_s = true;
 		}	
@@ -61,16 +65,21 @@ void ofApp::update(){
 
     if (ofGetKeyPressed('x')) {
 
-		if (!pressed_x) {
-			if (num_rail1 >= vr.size() - 1 && vr[0]->occupied==false) {
-				vr[num_rail1]->occupied = false;
-				player1.setRail(vr[0]);
-				player1.position->occupied = true;
+		if (!pressed_s && !pressed_x) { // if X wasnt pressed
+			if (num_rail1 >= vr.size() - 1) { // if player is on last rail
+				if (vr[0]->occupied == false) { // if rail 0 is free
+					vr[num_rail1]->occupied = false;
+					player1.setRail(vr[0]);
+					player1.position->occupied = true;
+				}
+
 			}
-			else if(vr[num_rail1 + 1]->occupied==false) {
-				vr[num_rail1]->occupied = false;
-				player1.setRail(vr[num_rail1 + 1]);
-				player1.position->occupied = true;
+			else{ // if player isnt on last rail
+				if (vr[num_rail1 + 1]->occupied == false) { // if rail below is free
+					vr[num_rail1]->occupied = false;
+					player1.setRail(vr[num_rail1 + 1]);
+					player1.position->occupied = true;
+				}			
 			}
 			pressed_x = true;
 		}		
@@ -81,20 +90,24 @@ void ofApp::update(){
 
 	// Mover el jugador 2
 	Rail* current_rail2 = player2.getRail();
-	double num_rail2 = current_rail2->id;
+	int num_rail2 = current_rail2->id;
 
 	if (ofGetKeyPressed('j')) {
 
-		if (!pressed_j) {
-			if (num_rail2 <= 0 && vr[vr.size() - 1]->occupied == false) {
-				vr[num_rail2]->occupied = false;
-				player2.setRail(vr[vr.size() - 1]);
-				player2.position->occupied = true;
+		if (!pressed_j && !pressed_n) { // if J wasnt pressed
+			if (num_rail2 <= 0) { // If player is on rail 0
+				if (vr[vr.size() - 1]->occupied == false) { // if last rail is free
+					vr[num_rail2]->occupied = false;
+					player2.setRail(vr[vr.size() - 1]);
+					player2.position->occupied = true;
+				}
 			}
-			else if (vr[num_rail2 - 1]->occupied == false) {
-				vr[num_rail2]->occupied = false;
-				player2.setRail(vr[num_rail2 - 1]);
-				player2.position->occupied = true;
+			else { // if player isnt on rail 0
+				if (vr[num_rail2 - 1]->occupied == false) { //if rail above is free
+					vr[num_rail2]->occupied = false;
+					player2.setRail(vr[num_rail2 - 1]);
+					player2.position->occupied = true;
+				}
 			}
 			pressed_j = true;
 		}
@@ -105,16 +118,21 @@ void ofApp::update(){
 
 	if (ofGetKeyPressed('n')) {
 
-		if (!pressed_n) {
-			if (num_rail2 >= vr.size() - 1 && vr[0]->occupied == false) {
-				vr[num_rail2]->occupied = false;
-				player2.setRail(vr[0]);
-				player2.position->occupied = true;
+		if (!pressed_j && !pressed_n) { // if N wasnt pressed
+			if (num_rail2 >= vr.size() - 1) { // if player is on last rail
+				if (vr[0]->occupied == false) { // if rail 0 is free
+					vr[num_rail2]->occupied = false;
+					player2.setRail(vr[0]);
+					player2.position->occupied = true;
+				}
+
 			}
-			else if (vr[num_rail2 + 1]->occupied == false) {
-				vr[num_rail2]->occupied = false;
-				player2.setRail(vr[num_rail2 + 1]);
-				player2.position->occupied = true;
+			else { // if player isnt on last rail
+				if (vr[num_rail2 + 1]->occupied == false) { // if rail below is free
+					vr[num_rail2]->occupied = false;
+					player2.setRail(vr[num_rail2 + 1]);
+					player2.position->occupied = true;
+				}
 			}
 			pressed_n = true;
 		}
