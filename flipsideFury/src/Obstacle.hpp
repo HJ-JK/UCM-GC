@@ -28,6 +28,13 @@ class Obstacle{
     void draw();
     void setRail(Rail* newRail);
     Rail* getRail();
+    
+    void setType(int newtype);
+    int getType();
+    
+    void setXcoord(int newXcoord);
+    int getXcoord();
+    
 };
 
 #endif /* Obstacle_hpp */

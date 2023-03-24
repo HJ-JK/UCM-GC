@@ -18,6 +18,9 @@ class ofApp : public ofBaseApp{
 		bool pressed_s;
 		bool pressed_x;
 
+		bool pressed_j;
+		bool pressed_n;
+
 		void setup();
 		void update();
 		void draw();
@@ -52,4 +55,5 @@ class ofApp : public ofBaseApp{
 		Player player2;
         
         Obstacle Obstacle1;
+        Obstacle Obstacle2;
 };
