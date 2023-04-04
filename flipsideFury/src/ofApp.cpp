@@ -10,6 +10,7 @@ void ofApp::setup(){
 
 	// Definiciones principales
 	numLines= 5;
+    numObstacles = 3;
 	widthRail = 25;
 	x_init = 100;
 	x_lon = 800;
@@ -20,6 +21,9 @@ void ofApp::setup(){
 	// Crear las lineas y los rails
 	vl = setLines(numLines);
 	setRails(vl);
+    
+    // Crear Obstaculos
+    vo = setObstacles(numObstacles);
 
 	player1.setId(0);
 	player1.setPoints(0);
@@ -39,10 +43,20 @@ void ofApp::setup(){
     Obstacle2.setType(0);
     Obstacle2.setXcoord(0);
     
+    for (int i=0; i<N_SOUNDS; i++) {
+        sound[i].load("sfx/"+ofToString(i)+".mp3");
+        sound[i].setMultiPlay(true);
+        sound[i].setLoop(false);
+    }
+    
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    colision();
+    
 
 	// Mover el jugador 1
 	Rail* current_rail1 = player1.getRail();
@@ -151,6 +165,7 @@ void ofApp::update(){
 	}
     
     Obstacle1.x_coord--;
+    
 
 	
 
@@ -269,4 +284,23 @@ vector <Line*> ofApp::setLines(int numLines) {
 		vl.push_back(new Line(i, x_init, y_init*(i+1), x_lon));
 	}
 	return vl;
+}
+
+//--------------------------------------------------------------
+vector <Obstacle*> ofApp::setObstacles(int numObstacles) {
+
+    for (int i = 0; i < numObstacles; i++) {
+        // TODO set id, cambiar modulo more types, set speed random
+        vo.push_back(new Obstacle(rand()%2, 0, 1, vr[0]));
+    }
+    return vo;
+}
+
+
+//--------------------------------------------------------------
+void ofApp::colision(){
+    if (player1.position == Obstacle1.rail and 800 + Obstacle1.x_coord < 175){
+        player1.setPoints(player1.getPoints()-1);
+        sound[0].play();
+    }
 }

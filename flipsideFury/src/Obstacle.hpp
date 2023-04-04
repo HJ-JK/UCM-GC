@@ -16,12 +16,14 @@ class Obstacle{
     public:
         int type;
         int x_coord;
+        int speed;
 
         Rail* rail;
         Obstacle(){};
-        Obstacle(int t, int x, Rail* r) { // Constructor with parameters
+        Obstacle(int t, int x, int s, Rail* r) { // Constructor with parameters
             type = t;
             x_coord = x;
+            speed = s;
             rail = r;
         }
     
@@ -34,6 +36,9 @@ class Obstacle{
     
     void setXcoord(int newXcoord);
     int getXcoord();
+    
+    void setSpeed(int newSpeed);
+    int getSpeed();
     
 };
 

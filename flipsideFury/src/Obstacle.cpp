@@ -40,3 +40,12 @@ void Obstacle::setXcoord(int newXcoord) {
 int Obstacle::getXcoord() {
     return x_coord;
 }
+
+void Obstacle::setSpeed(int newSpeed) {
+    speed = newSpeed;
+}
+
+int Obstacle::getSpeed() {
+    return speed;
+}
+
