@@ -30,6 +30,12 @@ class ofApp : public ofBaseApp{
 		bool pressed_j;
 		bool pressed_n;
 
+		int sound_ticks_1;
+		int sound_ticks_2;
+
+		bool play_sound_1;
+		bool play_sound_2;
+
 		void setup();
 		void update();
 		void draw();
@@ -46,6 +52,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         void colision();
+		void soundControl();
+		void updateObstacles();
 
 
 		// Metodo para establecer posiciones
@@ -57,6 +65,8 @@ class ofApp : public ofBaseApp{
     
         // Metodo para establecer lineas
         vector <Obstacle*> setObstacles(int numObstacles);
+		// Metodo draw lines
+		void drawObstacles(vector <Obstacle*> vo);
 
 		// Posiciones
 		vector<Rail *> vr;

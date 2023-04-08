@@ -8,13 +8,29 @@
 #include "Obstacle.hpp"
 
 void Obstacle::draw(){
+	
+	
+	
     if (type == 0){
-        ofTranslate(800 + x_coord, rail -> y_coord - 16);
-        ofDrawTriangle(0,40,20,0,40,40);
+		ofPushMatrix();
+        ofTranslate(x_coord, rail->y_coord - 25);
+		ofSetColor(ofColor::yellow);
+        ofDrawTriangle(0,50,25,0,50,50);
+		ofPopMatrix();
     }else if (type == 1){
-        ofTranslate(800 + x_coord, rail -> y_coord - 50);
-        ofDrawRectangle(0, 0, 10, 75);
-    }
+		ofPushMatrix();
+        ofTranslate(x_coord, rail->y_coord - 25);
+		ofSetColor(ofColor::orange);
+        ofDrawRectangle(0, 0, 25, 50);
+		ofPopMatrix();
+    }else if (type == 2) {
+		ofPushMatrix();
+		ofTranslate(x_coord, rail->y_coord);
+		ofSetColor(ofColor::green);
+		ofDrawCircle(0, 0, 0, 25);
+		ofPopMatrix();
+	}
+	
 }
 
 void Obstacle::setRail(Rail* newRail) {
