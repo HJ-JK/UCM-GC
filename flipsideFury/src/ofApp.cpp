@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+	ofSetWindowTitle("Flipside Game");
+	gameOn = true;
+
 	bool pressed_s = false;
 	bool pressed_x = false;
 	bool pressed_j = false;
@@ -57,145 +60,198 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    
-    colision();
+	if (gameOn) {
 
-	soundControl();
-    
 
-	// Mover el jugador 1
-	Rail* current_rail1 = player1.getRail();
-	int num_rail1 = current_rail1->id;
+		colision();
 
-	if (ofGetKeyPressed('s')) {
+		soundControl();
 
-		if (!pressed_s && !pressed_x){ // if S wasnt pressed
-			if (num_rail1 <= 0) { // If player is on rail 0
-				if (vr[vr.size() - 1]->occupied == false) { // if last rail is free
-					vr[num_rail1]->occupied = false;
-					player1.setRail(vr[vr.size() - 1]);
-					player1.position->occupied = true;
-				}	
-			}
-			else{ // if player isnt on rail 0
-				if (vr[num_rail1 - 1]->occupied == false) { //if rail above is free
-					vr[num_rail1]->occupied = false;
-					player1.setRail(vr[num_rail1 - 1]);
-					player1.position->occupied = true;
-				}	
-			}
-			pressed_s = true;
-		}	
-	}
-	else {
-		pressed_s = false;
-	}
-
-    if (ofGetKeyPressed('x')) {
-
-		if (!pressed_s && !pressed_x) { // if X wasnt pressed
-			if (num_rail1 >= vr.size() - 1) { // if player is on last rail
-				if (vr[0]->occupied == false) { // if rail 0 is free
-					vr[num_rail1]->occupied = false;
-					player1.setRail(vr[0]);
-					player1.position->occupied = true;
-				}
-
-			}
-			else{ // if player isnt on last rail
-				if (vr[num_rail1 + 1]->occupied == false) { // if rail below is free
-					vr[num_rail1]->occupied = false;
-					player1.setRail(vr[num_rail1 + 1]);
-					player1.position->occupied = true;
-				}			
-			}
-			pressed_x = true;
-		}		
-	}
-	else {
-		pressed_x = false;
-	}
-
-	// Mover el jugador 2
-	Rail* current_rail2 = player2.getRail();
-	int num_rail2 = current_rail2->id;
-
-	if (ofGetKeyPressed('j')) {
-
-		if (!pressed_j && !pressed_n) { // if J wasnt pressed
-			if (num_rail2 <= 0) { // If player is on rail 0
-				if (vr[vr.size() - 1]->occupied == false) { // if last rail is free
-					vr[num_rail2]->occupied = false;
-					player2.setRail(vr[vr.size() - 1]);
-					player2.position->occupied = true;
-				}
-			}
-			else { // if player isnt on rail 0
-				if (vr[num_rail2 - 1]->occupied == false) { //if rail above is free
-					vr[num_rail2]->occupied = false;
-					player2.setRail(vr[num_rail2 - 1]);
-					player2.position->occupied = true;
-				}
-			}
-			pressed_j = true;
+		// Stop the game 
+		int score_p1 = player1.getPoints();
+		int score_p2 = player2.getPoints();
+		// One loose
+		if (score_p1 < 0 or score_p2 < 0) {
+			gameOn = false;
 		}
-	}
-	else {
-		pressed_j = false;
-	}
-
-	if (ofGetKeyPressed('n')) {
-
-		if (!pressed_j && !pressed_n) { // if N wasnt pressed
-			if (num_rail2 >= vr.size() - 1) { // if player is on last rail
-				if (vr[0]->occupied == false) { // if rail 0 is free
-					vr[num_rail2]->occupied = false;
-					player2.setRail(vr[0]);
-					player2.position->occupied = true;
-				}
-
-			}
-			else { // if player isnt on last rail
-				if (vr[num_rail2 + 1]->occupied == false) { // if rail below is free
-					vr[num_rail2]->occupied = false;
-					player2.setRail(vr[num_rail2 + 1]);
-					player2.position->occupied = true;
-				}
-			}
-			pressed_n = true;
+		// Too long
+		if (score_p1 > 100000 or score_p2 > 100000) {
+			gameOn = false;
 		}
-	}
-	else {
-		pressed_n = false;
-	}
-    
-	
-	player1.setPoints( player1.getPoints() + 1);
-	player2.setPoints( player2.getPoints() + 1);
-    
-	updateObstacles();
-	
 
+		// Mover el jugador 1
+		Rail* current_rail1 = player1.getRail();
+		int num_rail1 = current_rail1->id;
+
+		if (ofGetKeyPressed('s')) {
+
+			if (!pressed_s && !pressed_x) { // if S wasnt pressed
+				if (num_rail1 <= 0) { // If player is on rail 0
+					if (vr[vr.size() - 1]->occupied == false) { // if last rail is free
+						vr[num_rail1]->occupied = false;
+						player1.setRail(vr[vr.size() - 1]);
+						player1.position->occupied = true;
+					}
+				}
+				else { // if player isnt on rail 0
+					if (vr[num_rail1 - 1]->occupied == false) { //if rail above is free
+						vr[num_rail1]->occupied = false;
+						player1.setRail(vr[num_rail1 - 1]);
+						player1.position->occupied = true;
+					}
+				}
+				pressed_s = true;
+			}
+		}
+		else {
+			pressed_s = false;
+		}
+
+		if (ofGetKeyPressed('x')) {
+
+			if (!pressed_s && !pressed_x) { // if X wasnt pressed
+				if (num_rail1 >= vr.size() - 1) { // if player is on last rail
+					if (vr[0]->occupied == false) { // if rail 0 is free
+						vr[num_rail1]->occupied = false;
+						player1.setRail(vr[0]);
+						player1.position->occupied = true;
+					}
+
+				}
+				else { // if player isnt on last rail
+					if (vr[num_rail1 + 1]->occupied == false) { // if rail below is free
+						vr[num_rail1]->occupied = false;
+						player1.setRail(vr[num_rail1 + 1]);
+						player1.position->occupied = true;
+					}
+				}
+				pressed_x = true;
+			}
+		}
+		else {
+			pressed_x = false;
+		}
+
+		// Mover el jugador 2
+		Rail* current_rail2 = player2.getRail();
+		int num_rail2 = current_rail2->id;
+
+		if (ofGetKeyPressed('j')) {
+
+			if (!pressed_j && !pressed_n) { // if J wasnt pressed
+				if (num_rail2 <= 0) { // If player is on rail 0
+					if (vr[vr.size() - 1]->occupied == false) { // if last rail is free
+						vr[num_rail2]->occupied = false;
+						player2.setRail(vr[vr.size() - 1]);
+						player2.position->occupied = true;
+					}
+				}
+				else { // if player isnt on rail 0
+					if (vr[num_rail2 - 1]->occupied == false) { //if rail above is free
+						vr[num_rail2]->occupied = false;
+						player2.setRail(vr[num_rail2 - 1]);
+						player2.position->occupied = true;
+					}
+				}
+				pressed_j = true;
+			}
+		}
+		else {
+			pressed_j = false;
+		}
+
+		if (ofGetKeyPressed('n')) {
+
+			if (!pressed_j && !pressed_n) { // if N wasnt pressed
+				if (num_rail2 >= vr.size() - 1) { // if player is on last rail
+					if (vr[0]->occupied == false) { // if rail 0 is free
+						vr[num_rail2]->occupied = false;
+						player2.setRail(vr[0]);
+						player2.position->occupied = true;
+					}
+
+				}
+				else { // if player isnt on last rail
+					if (vr[num_rail2 + 1]->occupied == false) { // if rail below is free
+						vr[num_rail2]->occupied = false;
+						player2.setRail(vr[num_rail2 + 1]);
+						player2.position->occupied = true;
+					}
+				}
+				pressed_n = true;
+			}
+		}
+		else {
+			pressed_n = false;
+		}
+
+		// TODO add points every 5 seconds 
+		player1.setPoints(player1.getPoints() + 1);
+		player2.setPoints(player2.getPoints() + 1);
+
+		updateObstacles();
+
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	ofSetColor(ofColor::indianRed);
-	player1.draw();
-	ofSetColor(ofColor::cornflowerBlue);
-	player2.draw();
+	if (gameOn) {
+		// Score
+		ofSetHexColor(0x000000);
+		ofDrawBitmapString("Score", ofGetWidth() / 2 - 5, 600);
+		ofDrawBitmapString("P1", ofGetWidth() / 2 - 50, 650);
+		ofDrawBitmapString("P2", ofGetWidth() / 2 + 50, 650);
+		int score_p1 = player1.getPoints();
+		int score_p2 = player2.getPoints();
+		ofDrawBitmapString(score_p1, ofGetWidth() / 2 - 50, 700);
+		ofDrawBitmapString(score_p2, ofGetWidth() / 2 + 50, 700);
 
+		// Players
+		ofSetColor(ofColor::indianRed);
+		player1.draw();
+		ofSetColor(ofColor::cornflowerBlue);
+		player2.draw();
 
-	drawObstacles(vo);
-    
+		// Obstacles
+		drawObstacles(vo);
 
-	ofSetColor(ofColor::white);
-	drawLines(vl);
+		// Lines
+		ofSetColor(ofColor::white);
+		drawLines(vl);
 
-	
+	}
+	else {
+		// Score
+		ofSetHexColor(0x000000);
+		ofDrawBitmapString("Score", ofGetWidth() / 2 - 5, ofGetHeight()/2 - 100);
+		ofDrawBitmapString("P1", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 50);
+		ofDrawBitmapString("P2", ofGetWidth() / 2 + 50, ofGetHeight() / 2 - 50);
+		int score_p1 = player1.getPoints();
+		int score_p2 = player2.getPoints();
+		ofDrawBitmapString(score_p1, ofGetWidth() / 2 - 50, ofGetHeight() / 2);
+		ofDrawBitmapString(score_p2, ofGetWidth() / 2 + 50, ofGetHeight() / 2);
+
+		// Too long
+		if (score_p1 > 100000 or score_p2 > 100000) {
+			ofDrawBitmapString("Congrats! You both win (long game)", ofGetWidth() / 2 - 100, ofGetHeight() / 2 + 50);
+		}
+		// One loose
+		if (score_p1 < 0 and score_p2 < 0) {
+			ofDrawBitmapString("You both loose :(", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
+		}
+		else if (score_p1 < 0) {
+			ofDrawBitmapString("Player 2 win", ofGetWidth() / 2 - 30, ofGetHeight() / 2 + 50);
+		}
+		else if (score_p2 < 0) {
+			ofDrawBitmapString("Player 1 win", ofGetWidth() / 2 - 30, ofGetHeight() / 2 + 50);
+		}
+
+	}
 
 }
+	
 
 //--------------------------------------------------------------
 void ofApp::drawLines(vector <Line*> vl) {
@@ -342,7 +398,6 @@ void ofApp::colision(){
 			sound[0].play();
 			play_sound_1 = true;
 
-
 			// updates obstacle
 			vo[i]->setXcoord(x_lon); // reset position
 			int auxSpeed = rand() % 5;
@@ -360,6 +415,7 @@ void ofApp::colision(){
 			player2.setPoints(player2.getPoints() - 1000); // - vo[i].getPenalty()
 			sound[1].play();
 			play_sound_2 = true;
+
 
 
 			// updates obstacle

@@ -17,6 +17,8 @@ class ofApp : public ofBaseApp{
 
 	public:
 
+		bool gameOn;
+
         int numObstacles;
 		int numLines;
 		int widthRail;
