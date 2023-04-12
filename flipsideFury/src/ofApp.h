@@ -89,4 +89,6 @@ class ofApp : public ofBaseApp{
     
         ofSoundPlayer  sound[N_SOUNDS];
     
+        ofTrueTypeFont    verdana;
+    
 };
