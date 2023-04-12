@@ -19,7 +19,10 @@ class ofApp : public ofBaseApp{
     
         ofImage imageBG;
 
-		bool gameOn;
+		enum GameState { preGame, gameOn, gameOff, endGame };
+		GameState gs;
+		int numGames;
+		int numTotalGames;
 
         int numObstacles;
 		int numLines;

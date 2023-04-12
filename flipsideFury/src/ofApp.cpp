@@ -8,6 +8,10 @@ void ofApp::setup(){
     imageBG.load("BG2.jpg");
     
 	gameOn = true;
+	ofSetBackgroundColor(ofColor :: cadetBlue);
+	gs = preGame;
+	numGames = 0;
+	numTotalGames = 5;
 
 	bool pressed_s = false;
 	bool pressed_x = false;
@@ -65,8 +69,12 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
-	if (gameOn) {
-
+	if (gs == preGame) {
+		// preGame code
+		gs = gameOn;
+	}
+	if (gs == gameOn) {
+		// gameOn code
 
 		colision();
 
@@ -77,12 +85,14 @@ void ofApp::update(){
 		int score_p2 = player2.getPoints();
 		// One loose
 		if (score_p1 < 0 or score_p2 < 0) {
-			gameOn = false;
+			gs = gameOff;
 		}
 		// Too long
 		if (score_p1 > 100000 or score_p2 > 100000) {
-			gameOn = false;
+			gs = gameOff;
 		}
+
+
 
 		// Mover el jugador 1
 		Rail* current_rail1 = player1.getRail();
@@ -190,9 +200,9 @@ void ofApp::update(){
 			pressed_n = false;
 		}
 
- 		// Rewarding players every 30 updates
+		// Rewarding players every 30 updates
 		if (count_pts >= 30) {
-			count_pts=0;
+			count_pts = 0;
 			player1.setPoints(player1.getPoints() + 1);
 			player2.setPoints(player2.getPoints() + 1);
 		}
@@ -200,7 +210,40 @@ void ofApp::update(){
 
 		updateObstacles();
 
+		// Update to gameOff
+		int score_p1 = player1.getPoints();
+		int score_p2 = player2.getPoints();
+		// Too long
+		if (score_p1 > 100000 or score_p2 > 100000) {
+			gs = gameOff;
+		}
+		// One loose
+		if (score_p1 < 0 and score_p2 < 0) {
+			gs = gameOff;
+		}
+		else if (score_p1 < 0) {
+			gs = gameOff;
+		}
+		else if (score_p2 < 0) {
+			gs = gameOff;
+		}
+
 	}
+	if (gs == gameOff) {
+		// gameOff code
+
+		if (numGames < numTotalGames) {
+			numGames++;
+			gs = gameOn;	
+		}
+		else {
+			gs = endGame;
+		}
+
+	}
+	if (gs == endGame) {
+	}
+
 }
 
 //--------------------------------------------------------------
@@ -208,25 +251,22 @@ void ofApp::draw(){
     
     imageBG.draw(0, 0, ofGetWidth(), ofGetHeight());
 
-	if (gameOn) {
+	if (gs == preGame) {
+		ofSetColor(ofColor::white);
+		verdana.drawString("Flipside Game", ofGetWidth() / 2 - 30, 600);
+		verdana.drawString("START", ofGetWidth() / 2 - 200, 650);
+	}
+	if (gs == gameOn) {
 		// Score
-		ofSetColor(ofColor :: white);
-        verdana.drawString("Score", ofGetWidth() / 2 - 30, 600);
-        verdana.drawString("P1", ofGetWidth() / 2 - 200, 650);
-        verdana.drawString("P2", ofGetWidth() / 2 + 200, 650);
-        /*
-		ofDrawBitmapString("Score", ofGetWidth() / 2 - 5, 600);
-		ofDrawBitmapString("P1", ofGetWidth() / 2 - 50, 650);
-		ofDrawBitmapString("P2", ofGetWidth() / 2 + 50, 650);
-        */
+		ofSetColor(ofColor::white);
+		verdana.drawString("Score", ofGetWidth() / 2 - 30, 600);
+		verdana.drawString("P1", ofGetWidth() / 2 - 200, 650);
+		verdana.drawString("P2", ofGetWidth() / 2 + 200, 650);
+
 		int score_p1 = player1.getPoints();
 		int score_p2 = player2.getPoints();
-        verdana.drawString(ofToString(score_p1), ofGetWidth() / 2 - 200, 700);
-        verdana.drawString(ofToString(score_p2), ofGetWidth() / 2 + 200, 700);
-        /*
-		ofDrawBitmapString(score_p1, ofGetWidth() / 2 - 50, 700);
-		ofDrawBitmapString(score_p2, ofGetWidth() / 2 + 50, 700);
-        */
+		verdana.drawString(ofToString(score_p1), ofGetWidth() / 2 - 200, 700);
+		verdana.drawString(ofToString(score_p2), ofGetWidth() / 2 + 200, 700);
 
 		// Players
 		ofSetColor(ofColor::indianRed);
@@ -240,7 +280,6 @@ void ofApp::draw(){
 		// Lines
 		ofSetColor(ofColor::white);
 		drawLines(vl);
-
 	}
 	else {
 		// Score
@@ -255,13 +294,6 @@ void ofApp::draw(){
         */
 		int score_p1 = player1.getPoints();
 		int score_p2 = player2.getPoints();
-        verdana.drawString(ofToString(score_p1), ofGetWidth() / 2 - 200, ofGetHeight() / 2);
-        verdana.drawString(ofToString(score_p2), ofGetWidth() / 2 + 200, ofGetHeight() / 2);
-        /*
-		ofDrawBitmapString(score_p1, ofGetWidth() / 2 - 50, ofGetHeight() / 2);
-		ofDrawBitmapString(score_p2, ofGetWidth() / 2 + 50, ofGetHeight() / 2);
-        */
-
 		// Too long
 		if (score_p1 > 100000 or score_p2 > 100000) {
 			verdana.drawString("Congrats! You both win (long game)", ofGetWidth() / 2 - 150, ofGetHeight() / 2 + 50);
