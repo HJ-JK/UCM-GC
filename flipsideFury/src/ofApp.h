@@ -16,6 +16,8 @@ public:
 class ofApp : public ofBaseApp{
 
 	public:
+    
+        ofImage imageBG;
 
 		bool gameOn;
 

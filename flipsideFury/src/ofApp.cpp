@@ -4,7 +4,9 @@
 void ofApp::setup(){
 
 	ofSetWindowTitle("Flipside Game");
-	ofSetBackgroundColor(ofColor :: cadetBlue);
+	//ofSetBackgroundColor(ofColor :: cadetBlue);
+    imageBG.load("BG2.jpg");
+    
 	gameOn = true;
 
 	bool pressed_s = false;
@@ -203,6 +205,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    imageBG.draw(0, 0, ofGetWidth(), ofGetHeight());
 
 	if (gameOn) {
 		// Score
@@ -241,9 +245,9 @@ void ofApp::draw(){
 	else {
 		// Score
 		ofSetColor(ofColor::white);
-        verdana.drawString("Score", ofGetWidth() / 2 - 30, ofGetHeight()/2 - 100);
+        verdana.drawString("Score", ofGetWidth() / 2 - 50, ofGetHeight()/2 - 100);
         verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2 - 50);
-        verdana.drawString("P2", ofGetWidth() / 2 + 200, ofGetHeight() / 2 - 50);
+        verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2 - 50);
         /*
 		ofDrawBitmapString("Score", ofGetWidth() / 2 - 5, ofGetHeight()/2 - 100);
 		ofDrawBitmapString("P1", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 50);
