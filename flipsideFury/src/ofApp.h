@@ -17,7 +17,10 @@ class ofApp : public ofBaseApp{
 
 	public:
 
-		bool gameOn;
+		enum GameState { preGame, gameOn, gameOff, endGame };
+		GameState gs;
+		int numGames;
+		int numTotalGames;
 
         int numObstacles;
 		int numLines;
