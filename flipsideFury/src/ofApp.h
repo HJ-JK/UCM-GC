@@ -38,6 +38,8 @@ class ofApp : public ofBaseApp{
 		bool play_sound_1;
 		bool play_sound_2;
 
+		int count_pts;
+
 		void setup();
 		void update();
 		void draw();

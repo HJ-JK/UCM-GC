@@ -186,9 +186,13 @@ void ofApp::update(){
 			pressed_n = false;
 		}
 
-		// TODO add points every 5 seconds 
-		player1.setPoints(player1.getPoints() + 1);
-		player2.setPoints(player2.getPoints() + 1);
+ 		// Rewarding players every 30 updates
+		if (count_pts >= 30) {
+			count_pts=0;
+			player1.setPoints(player1.getPoints() + 1);
+			player2.setPoints(player2.getPoints() + 1);
+		}
+		count_pts++;
 
 		updateObstacles();
 
