@@ -4,6 +4,7 @@
 void ofApp::setup(){
 
 	ofSetWindowTitle("Flipside Game");
+	ofSetBackgroundColor(ofColor :: black);
 	gameOn = true;
 
 	bool pressed_s = false;
@@ -199,7 +200,7 @@ void ofApp::draw(){
 
 	if (gameOn) {
 		// Score
-		ofSetHexColor(0x000000);
+		ofSetColor(ofColor :: white);
 		ofDrawBitmapString("Score", ofGetWidth() / 2 - 5, 600);
 		ofDrawBitmapString("P1", ofGetWidth() / 2 - 50, 650);
 		ofDrawBitmapString("P2", ofGetWidth() / 2 + 50, 650);
@@ -224,7 +225,7 @@ void ofApp::draw(){
 	}
 	else {
 		// Score
-		ofSetHexColor(0x000000);
+		ofSetColor(ofColor::white);
 		ofDrawBitmapString("Score", ofGetWidth() / 2 - 5, ofGetHeight()/2 - 100);
 		ofDrawBitmapString("P1", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 50);
 		ofDrawBitmapString("P2", ofGetWidth() / 2 + 50, ofGetHeight() / 2 - 50);
