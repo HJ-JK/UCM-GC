@@ -5,13 +5,12 @@ void ofApp::setup(){
 
 	ofSetWindowTitle("Flipside Game");
 	//ofSetBackgroundColor(ofColor :: cadetBlue);
-    imageBG.load("BG2.jpg");
+    imageBG.load("BG3.jpg");
     
-	gameOn = true;
 	ofSetBackgroundColor(ofColor :: cadetBlue);
 	gs = preGame;
 	numGames = 0;
-	numTotalGames = 5;
+	numTotalGames = 5; // TODO modify this parameter with Gui
 
 	bool pressed_s = false;
 	bool pressed_x = false;
@@ -30,7 +29,6 @@ void ofApp::setup(){
 	x_init = 100;
 	x_lon = 1400;
 	y_init = 100;
-
 
 
 	// Crear las lineas y los rails
@@ -70,28 +68,14 @@ void ofApp::setup(){
 void ofApp::update(){
 
 	if (gs == preGame) {
-		// preGame code
 		gs = gameOn;
+		numGames = 1;
 	}
 	if (gs == gameOn) {
-		// gameOn code
 
 		colision();
 
 		soundControl();
-
-		// Stop the game 
-		int score_p1 = player1.getPoints();
-		int score_p2 = player2.getPoints();
-		// One loose
-		if (score_p1 < 0 or score_p2 < 0) {
-			gs = gameOff;
-		}
-		// Too long
-		if (score_p1 > 100000 or score_p2 > 100000) {
-			gs = gameOff;
-		}
-
 
 
 		// Mover el jugador 1
@@ -213,24 +197,17 @@ void ofApp::update(){
 		// Update to gameOff
 		int score_p1 = player1.getPoints();
 		int score_p2 = player2.getPoints();
+		// One loose
+		if (score_p1 < 0 or score_p2 < 0) {
+			gs = gameOff;
+		}
 		// Too long
 		if (score_p1 > 100000 or score_p2 > 100000) {
-			gs = gameOff;
-		}
-		// One loose
-		if (score_p1 < 0 and score_p2 < 0) {
-			gs = gameOff;
-		}
-		else if (score_p1 < 0) {
-			gs = gameOff;
-		}
-		else if (score_p2 < 0) {
 			gs = gameOff;
 		}
 
 	}
 	if (gs == gameOff) {
-		// gameOff code
 
 		if (numGames < numTotalGames) {
 			numGames++;
@@ -253,11 +230,14 @@ void ofApp::draw(){
 
 	if (gs == preGame) {
 		ofSetColor(ofColor::white);
-		verdana.drawString("Flipside Game", ofGetWidth() / 2 - 30, 600);
-		verdana.drawString("START", ofGetWidth() / 2 - 200, 650);
+		verdana.drawString("Flipside Game", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 100);
+		verdana.drawString("START", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
+		// TODO add "press to start" and GUI
 	}
 	if (gs == gameOn) {
 		// Score
+		ofSetColor(ofColor::darkBlue);
+		ofDrawRectangle(ofGetWidth() / 2 - 250, 550, 525, 190);
 		ofSetColor(ofColor::white);
 		verdana.drawString("Score", ofGetWidth() / 2 - 30, 600);
 		verdana.drawString("P1", ofGetWidth() / 2 - 200, 650);
@@ -281,17 +261,15 @@ void ofApp::draw(){
 		ofSetColor(ofColor::white);
 		drawLines(vl);
 	}
-	else {
+	if (gs == gameOff) {
 		// Score
+		ofSetColor(ofColor::darkBlue);
+		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 150, 525, 190);
 		ofSetColor(ofColor::white);
         verdana.drawString("Score", ofGetWidth() / 2 - 50, ofGetHeight()/2 - 100);
         verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2 - 50);
         verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2 - 50);
-        /*
-		ofDrawBitmapString("Score", ofGetWidth() / 2 - 5, ofGetHeight()/2 - 100);
-		ofDrawBitmapString("P1", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 50);
-		ofDrawBitmapString("P2", ofGetWidth() / 2 + 50, ofGetHeight() / 2 - 50);
-        */
+
 		int score_p1 = player1.getPoints();
 		int score_p2 = player2.getPoints();
 		// Too long
@@ -308,7 +286,16 @@ void ofApp::draw(){
 		else if (score_p2 < 0) {
             verdana.drawString("Player 1 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
 		}
-
+	}
+	if (gs == endGame) {
+		ofSetColor(ofColor::darkBlue);
+		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 150, 525, 290);
+		ofSetColor(ofColor::white);
+		verdana.drawString("Flipside", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 100);
+		verdana.drawString("End of the game ", ofGetWidth() / 2 - 120, ofGetHeight() / 2 - 50);
+		verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2);
+		verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2);
+		// TODO print the winner and the number of winning games (3-2)
 	}
 
 }
