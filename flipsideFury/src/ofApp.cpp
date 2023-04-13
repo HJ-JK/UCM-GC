@@ -70,8 +70,8 @@ void ofApp::setup(){
     verdana.load("Arial Unicode.ttf", 25, true, true);
 
 	gui.setup();
-	gui.add(dif.set("Difficulty", 1, 1, 5));
-	gui.add(totalGames.set("Number of Games", 1, 1, 5));
+	gui.add(dif.set("Difficulty", 1, 1, 6));
+	gui.add(totalGames.set("Number of Games", 1, 1, 10));
     
     
 }
@@ -381,15 +381,15 @@ void ofApp::draw(){
 		int total_p1 = player1.getWins();
 		int total_p2 = player2.getWins();
 
-		/*if (total_p1 > total_p2) {
+		if (total_p1 > total_p2) {
 			verdana.drawString("Player 1 wins", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 100);
 		}
-		if (total_p1 < total_p2) {
+		else if (total_p1 < total_p2) {
 			verdana.drawString("Player 2 wins", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 100);
 		}
-		if (total_p1 = total_p2) {
+		else{
 			verdana.drawString("TIE", ofGetWidth() / 2 - 10, ofGetHeight() / 2 - 100);
-		}*/
+		}
 		
 
 		// Print Wins
@@ -641,6 +641,12 @@ void ofApp::resetGame() {
 
 	for (Obstacle* o : vo) {
 		o->setXcoord(x_lon); // Reset_all obstacles position
+		int auxSpeed = rand() % 5;
+		if (auxSpeed == 0) {
+			auxSpeed = 5;
+		}
+		o->setSpeed(auxSpeed);
+		o->setType(rand() % 3);
 	}
 }
 
