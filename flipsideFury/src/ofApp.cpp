@@ -10,7 +10,7 @@ void ofApp::setup(){
 	ofSetBackgroundColor(ofColor :: cadetBlue);
 	gs = preGame;
 	numGames = 0;
-	numTotalGames = 1; // TODO modify this parameter with Gui
+	numTotalGames = 1;
 	gameSpeed = 1;
 
 	bool pressed_s = false;
@@ -287,10 +287,11 @@ void ofApp::draw(){
     imageBG.draw(0, 0, ofGetWidth(), ofGetHeight());
 
 	if (gs == preGame) {
+		ofSetColor(ofColor::darkBlue);
+		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 150, 525, 190);
 		ofSetColor(ofColor::white);
-		verdana.drawString("Flipside Game", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 100);
-		verdana.drawString("Press any key to Start!", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
-		// TODO add "press to start" and GUI
+		verdana.drawString("Flipside Game", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 100);
+		verdana.drawString("Press any key to Start", ofGetWidth() / 2 - 150, ofGetHeight() / 2);
 		gui.draw();
 	}
 	if (gs == gameOn) {
@@ -323,11 +324,11 @@ void ofApp::draw(){
 	if (gs == gameOff) {
 		// Score
 		ofSetColor(ofColor::darkBlue);
-		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 150, 525, 190);
+		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 150, 525, 340);
 		ofSetColor(ofColor::white);
         verdana.drawString("Score", ofGetWidth() / 2 - 50, ofGetHeight()/2 - 100);
-        verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2 - 50);
-        verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2 - 50);
+        verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2);
+        verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2);
 
 		int score_p1 = player1.getPoints();
 		int score_p2 = player2.getPoints();
@@ -338,48 +339,61 @@ void ofApp::draw(){
 				verdana.drawString("TIE! (long game)", ofGetWidth() / 2 - 150, ofGetHeight() / 2 + 50);
 			}
 			else if (score_p1 < score_p2) { // p2 wins
-				verdana.drawString("Player 2 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
+				verdana.drawString("Player 2 wins", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
 			}
 			else { // p1 wins
-				verdana.drawString("Player 1 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
+				verdana.drawString("Player 1 wins", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
 			}
 
 		}
 		// One loose
 		if (score_p1 < 0 and score_p2 < 0) {
-            verdana.drawString("You both loose :(", ofGetWidth() / 2 - 100, ofGetHeight() / 2 + 50);
+            verdana.drawString("You both loose :(", ofGetWidth() / 2 - 150, ofGetHeight() / 2 - 50);
 		}
 		else if (score_p1 < 0) {
-            verdana.drawString("Player 2 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
+            verdana.drawString("Player 2 wins", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 50);
 		}
 		else if (score_p2 < 0) {
-            verdana.drawString("Player 1 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
+            verdana.drawString("Player 1 wins", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 50);
 		}
 
 		// Print Wins
-		verdana.drawString(ofToString(player1.getWins()), ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 100);
-		verdana.drawString(ofToString(player2.getWins()), ofGetWidth() / 2 + 50, ofGetHeight() / 2 + 100);
+		verdana.drawString(ofToString(player1.getWins()), ofGetWidth() / 2 - 200, ofGetHeight() / 2 + 50);
+		verdana.drawString(ofToString(player2.getWins()), ofGetWidth() / 2 + 180, ofGetHeight() / 2 + 50);
 		// Print Continue
-		verdana.drawString("Press any key to continue game!", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
+		verdana.drawString("Press any key to continue game", ofGetWidth() / 2 - 220, ofGetHeight() / 2 + 140);
 	}
 	if (gs == endGame) {
 		ofSetColor(ofColor::darkBlue);
-		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 150, 525, 290);
+		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 250, 525, 400);
 		ofSetColor(ofColor::white);
-		verdana.drawString("Flipside", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 100);
-		verdana.drawString("End of the game ", ofGetWidth() / 2 - 120, ofGetHeight() / 2 - 50);
-		verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2);
-		verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2);
-		// TODO print the winner and the number of winning games (3-2)
+		verdana.drawString("Flipside", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 200);
+		verdana.drawString("End of the game ", ofGetWidth() / 2 - 120, ofGetHeight() / 2 - 150);
+		verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2 - 20);
+		verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2 - 20);
+
+		int total_p1 = player1.getWins();
+		int total_p2 = player2.getWins();
+
+		/*if (total_p1 > total_p2) {
+			verdana.drawString("Player 1 wins", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 100);
+		}
+		if (total_p1 < total_p2) {
+			verdana.drawString("Player 2 wins", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 100);
+		}
+		if (total_p1 = total_p2) {
+			verdana.drawString("TIE", ofGetWidth() / 2 - 10, ofGetHeight() / 2 - 100);
+		}*/
+		
 
 		// Print Wins
-		verdana.drawString(ofToString(player1.getWins()), ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 100);
-		verdana.drawString(ofToString(player2.getWins()), ofGetWidth() / 2 + 50, ofGetHeight() / 2 + 100);
+		verdana.drawString(ofToString(total_p1), ofGetWidth() / 2 - 200, ofGetHeight() / 2 + 20);
+		verdana.drawString(ofToString(total_p2), ofGetWidth() / 2 + 180, ofGetHeight() / 2 + 20);
 		// Print Continue
-		verdana.drawString("Press 'R' to retart game!", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
+		verdana.drawString("Press 'R' to Restart game", ofGetWidth() / 2 - 150, ofGetHeight() / 2 + 100);
 	}
 
-}
+}	
 	
 
 //--------------------------------------------------------------
