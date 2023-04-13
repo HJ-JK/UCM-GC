@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	ofSetWindowTitle("Flipside Game");
+	ofSetWindowTitle("Flipside Fury Game");
 	//ofSetBackgroundColor(ofColor :: cadetBlue);
     imageBG.load("BG3.jpg");
     
@@ -290,7 +290,7 @@ void ofApp::draw(){
 		ofSetColor(ofColor::darkBlue);
 		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 150, 525, 190);
 		ofSetColor(ofColor::white);
-		verdana.drawString("Flipside Game", ofGetWidth() / 2 - 100, ofGetHeight() / 2 - 100);
+		verdana.drawString("Flipside Fury Game", ofGetWidth() / 2 - 130, ofGetHeight() / 2 - 100);
 		verdana.drawString("Press any key to Start", ofGetWidth() / 2 - 150, ofGetHeight() / 2);
 		gui.draw();
 	}
@@ -367,7 +367,7 @@ void ofApp::draw(){
 		ofSetColor(ofColor::darkBlue);
 		ofDrawRectangle(ofGetWidth() / 2 - 250, ofGetHeight() / 2 - 250, 525, 400);
 		ofSetColor(ofColor::white);
-		verdana.drawString("Flipside", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 200);
+		verdana.drawString("Flipside Fury", ofGetWidth() / 2 - 80, ofGetHeight() / 2 - 200);
 		verdana.drawString("End of the game ", ofGetWidth() / 2 - 120, ofGetHeight() / 2 - 150);
 		verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2 - 20);
 		verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2 - 20);
