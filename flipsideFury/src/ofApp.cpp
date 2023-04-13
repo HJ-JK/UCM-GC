@@ -62,6 +62,11 @@ void ofApp::setup(){
         sound[i].setLoop(false);
     }
     
+    sound[5].load("sfx/Hina.mp3");
+    sound[5].setMultiPlay(true);
+    sound[5].setLoop(true);
+    sound[5].play();
+    
     verdana.load("Arial Unicode.ttf", 25, true, true);
 
 	gui.setup();
@@ -95,6 +100,7 @@ void ofApp::update(){
 		colision();
 
 		soundControl();
+        
 
 
 		// Mover el jugador 1

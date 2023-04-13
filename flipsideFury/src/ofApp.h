@@ -6,7 +6,7 @@
 #include "Obstacle.hpp"
 #include "ofxGui.h"
 
-#define N_SOUNDS 5
+#define N_SOUNDS 6
 
 class SoundData {
 public:
