@@ -260,14 +260,13 @@ void ofApp::update(){
 		if (numGames < numTotalGames) {
 
 			if (ofGetKeyPressed()) {
-				gs = gameOn;
-				numGames++;
-				
-				resetGame(); // We need to reset game
+				if (!ofGetKeyPressed('s') and !ofGetKeyPressed('x') and !ofGetKeyPressed('n') and !ofGetKeyPressed('j')) {
+
+					gs = gameOn;
+					numGames++;
+					resetGame(); // We need to reset game
+				}
 			}
-
-
-
 		}
 		else {
 			gs = endGame;
