@@ -10,12 +10,14 @@ class Player{
 		int id;
 		int points;
 		Rail * position;
+		int wins;
 
 		Player() {};
-		Player(int i, int pts, Rail * pos) { // Constructor with parameters
+		Player(int i, int pts, Rail * pos, int w) { // Constructor with parameters
 			id = i;
 			points = pts;
 			position = pos;
+			wins = w;
 		}
 		void setup();
 		void update();
@@ -29,6 +31,9 @@ class Player{
 
 		void setRail(Rail* newRail);
 		Rail* getRail();
+
+		void setWins(int newWins);
+		int getWins();
 
 		
 		

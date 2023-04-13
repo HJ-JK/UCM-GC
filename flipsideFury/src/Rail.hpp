@@ -22,4 +22,23 @@ class Rail{
 			occupied = o;
 			line = l;
 		}
+
+
+		void setId(int newId);
+		int getId();
+
+		void setWidth(int newWidth);
+		int getWidth();
+
+		void setPos(int newPos);
+		int getPos();
+
+		void setY_coord(int newY_coord);
+		int getY_coord();
+
+		void setOcuppied(bool newOccupied);
+		bool getOccupied();
+
+		void setLine(Line* newLine);
+		Line* getLine();
 };

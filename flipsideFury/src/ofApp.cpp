@@ -10,7 +10,8 @@ void ofApp::setup(){
 	ofSetBackgroundColor(ofColor :: cadetBlue);
 	gs = preGame;
 	numGames = 0;
-	numTotalGames = 5; // TODO modify this parameter with Gui
+	numTotalGames = 1; // TODO modify this parameter with Gui
+	gameSpeed = 1;
 
 	bool pressed_s = false;
 	bool pressed_x = false;
@@ -45,11 +46,13 @@ void ofApp::setup(){
 	player1.setPoints(0);
 	player1.setRail(vr[1]);
 	player1.position->occupied = true;
+	player1.setWins(0);
 
 	player2.setId(1);
 	player2.setPoints(0);
 	player2.setRail(vr[6]);
 	player2.position->occupied = true;
+	player2.setWins(0);
     
 
     
@@ -60,6 +63,10 @@ void ofApp::setup(){
     }
     
     verdana.load("Arial Unicode.ttf", 25, true, true);
+
+	gui.setup();
+	gui.add(dif.set("Difficulty", 1, 1, 5));
+	gui.add(totalGames.set("Number of Games", 1, 1, 5));
     
     
 }
@@ -68,8 +75,20 @@ void ofApp::setup(){
 void ofApp::update(){
 
 	if (gs == preGame) {
-		gs = gameOn;
-		numGames = 1;
+
+		if (ofGetKeyPressed()){
+			if (!ofGetKeyPressed('r')){
+
+				// GUI parameters
+				numTotalGames = totalGames;
+				gameSpeed = dif;
+
+				gs = gameOn;
+				numGames = 1;
+			}
+	
+		}
+		
 	}
 	if (gs == gameOn) {
 
@@ -197,21 +216,52 @@ void ofApp::update(){
 		// Update to gameOff
 		int score_p1 = player1.getPoints();
 		int score_p2 = player2.getPoints();
-		// One loose
+		// At least one loose
 		if (score_p1 < 0 or score_p2 < 0) {
-			gs = gameOff;
+			if (score_p1 < score_p2) {
+				player2.setWins(player2.getWins() + 1);
+				gs = gameOff;
+			}
+			else if (score_p2 < score_p1) {
+				player1.setWins(player1.getWins() + 1);
+				gs = gameOff;
+			}
+			else { // Tie
+				// No one wins
+				gs = gameOff;
+			}
+		
 		}
 		// Too long
-		if (score_p1 > 100000 or score_p2 > 100000) {
-			gs = gameOff;
+		if (score_p1 > 100 or score_p2 > 100) {
+			if (score_p1 == score_p2) { // Tie
+				// No one wins
+				gs = gameOff;
+			}else if (score_p1 < score_p2) { // p2 wins
+				player2.setWins(player2.getWins() + 1);
+				gs = gameOff;
+			}
+			else { // p1 wins
+				player1.setWins(player1.getWins() + 1);
+				gs = gameOff;
+			}
+			
 		}
 
 	}
 	if (gs == gameOff) {
 
 		if (numGames < numTotalGames) {
-			numGames++;
-			gs = gameOn;	
+
+			if (ofGetKeyPressed()) {
+				gs = gameOn;
+				numGames++;
+				
+				resetGame(); // We need to reset game
+			}
+
+
+
 		}
 		else {
 			gs = endGame;
@@ -219,6 +269,14 @@ void ofApp::update(){
 
 	}
 	if (gs == endGame) {
+
+		if (ofGetKeyPressed('r')) {
+
+			resetGame(); // We need to reset game
+			player1.setWins(0);
+			player2.setWins(0);
+			gs = preGame;
+		}
 	}
 
 }
@@ -231,8 +289,9 @@ void ofApp::draw(){
 	if (gs == preGame) {
 		ofSetColor(ofColor::white);
 		verdana.drawString("Flipside Game", ofGetWidth() / 2 - 50, ofGetHeight() / 2 - 100);
-		verdana.drawString("START", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
+		verdana.drawString("Press any key to Start!", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
 		// TODO add "press to start" and GUI
+		gui.draw();
 	}
 	if (gs == gameOn) {
 		// Score
@@ -273,8 +332,18 @@ void ofApp::draw(){
 		int score_p1 = player1.getPoints();
 		int score_p2 = player2.getPoints();
 		// Too long
-		if (score_p1 > 100000 or score_p2 > 100000) {
-			verdana.drawString("Congrats! You both win (long game)", ofGetWidth() / 2 - 150, ofGetHeight() / 2 + 50);
+		if (score_p1 > 100 or score_p2 > 100) {
+			if (score_p1 == score_p2) { // Draw
+				// No one wins
+				verdana.drawString("TIE! (long game)", ofGetWidth() / 2 - 150, ofGetHeight() / 2 + 50);
+			}
+			else if (score_p1 < score_p2) { // p2 wins
+				verdana.drawString("Player 2 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
+			}
+			else { // p1 wins
+				verdana.drawString("Player 1 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
+			}
+
 		}
 		// One loose
 		if (score_p1 < 0 and score_p2 < 0) {
@@ -286,6 +355,12 @@ void ofApp::draw(){
 		else if (score_p2 < 0) {
             verdana.drawString("Player 1 win", ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 50);
 		}
+
+		// Print Wins
+		verdana.drawString(ofToString(player1.getWins()), ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 100);
+		verdana.drawString(ofToString(player2.getWins()), ofGetWidth() / 2 + 50, ofGetHeight() / 2 + 100);
+		// Print Continue
+		verdana.drawString("Press any key to continue game!", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
 	}
 	if (gs == endGame) {
 		ofSetColor(ofColor::darkBlue);
@@ -296,6 +371,12 @@ void ofApp::draw(){
 		verdana.drawString("P1", ofGetWidth() / 2 - 200, ofGetHeight() / 2);
 		verdana.drawString("P2", ofGetWidth() / 2 + 180, ofGetHeight() / 2);
 		// TODO print the winner and the number of winning games (3-2)
+
+		// Print Wins
+		verdana.drawString(ofToString(player1.getWins()), ofGetWidth() / 2 - 50, ofGetHeight() / 2 + 100);
+		verdana.drawString(ofToString(player2.getWins()), ofGetWidth() / 2 + 50, ofGetHeight() / 2 + 100);
+		// Print Continue
+		verdana.drawString("Press 'R' to retart game!", ofGetWidth() / 2 - 50, ofGetHeight() / 2);
 	}
 
 }
@@ -325,7 +406,6 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
 }
 
 //--------------------------------------------------------------
@@ -442,7 +522,7 @@ void ofApp::colision(){
 
 	for (int i = 0; i < numObstacles; i++) {
 		if (player1.position == vo[i]->getRail() and vo[i]->getXcoord() < 175) {
-			player1.setPoints(player1.getPoints() - 1000);
+			player1.setPoints(player1.getPoints() - 50);
 			sound[0].play();
 			play_sound_1 = true;
 
@@ -460,7 +540,7 @@ void ofApp::colision(){
 
 	for (int i = 0; i < numObstacles; i++) {
 		if (player2.position == vo[i]->getRail() and vo[i]->getXcoord() < 175) {
-			player2.setPoints(player2.getPoints() - 1000); // - vo[i].getPenalty()
+			player2.setPoints(player2.getPoints() - 50); // - vo[i].getPenalty()
 			sound[1].play();
 			play_sound_2 = true;
 
@@ -506,7 +586,7 @@ void ofApp::updateObstacles() {
 
 	// Actualizar posicion obstaculos
 	for (int i = 0; i < numObstacles; i++) {
-		vo[i]->setXcoord(vo[i]->getXcoord() - vo[i]->getSpeed());
+		vo[i]->setXcoord(vo[i]->getXcoord() - vo[i]->getSpeed()*gameSpeed);
 
 
 		if (vo[i]->getXcoord() < 100) {
@@ -521,3 +601,27 @@ void ofApp::updateObstacles() {
 		}
 	}
 }
+
+//--------------------------------------------------------------
+void ofApp::resetGame() {
+
+	for (Rail* r : vr) {
+		r->setOcuppied(false);
+	}
+
+	player1.setPoints(0);
+	player1.setRail(vr[1]);
+	player1.position->occupied = true;
+
+
+	player2.setPoints(0);
+	player2.setRail(vr[6]);
+	player2.position->occupied = true;
+
+
+	for (Obstacle* o : vo) {
+		o->setXcoord(x_lon); // Reset_all obstacles position
+	}
+}
+
+

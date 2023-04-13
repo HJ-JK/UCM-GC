@@ -47,3 +47,13 @@ void Player::setRail(Rail* newRail) {
 Rail* Player::getRail() {
     return position;
 }
+
+//--------------------------------------------------------------
+void Player::setWins(int newWins) {
+	wins = newWins;
+}
+
+//--------------------------------------------------------------
+int Player::getWins() {
+	return wins;
+}

@@ -4,6 +4,7 @@
 #include "Player.hpp"
 #include "Rail.hpp"
 #include "Obstacle.hpp"
+#include "ofxGui.h"
 
 #define N_SOUNDS 5
 
@@ -23,6 +24,7 @@ class ofApp : public ofBaseApp{
 		GameState gs;
 		int numGames;
 		int numTotalGames;
+		int gameSpeed;
 
         int numObstacles;
 		int numLines;
@@ -63,6 +65,7 @@ class ofApp : public ofBaseApp{
         void colision();
 		void soundControl();
 		void updateObstacles();
+		void resetGame();
 
 
 		// Metodo para establecer posiciones
@@ -94,6 +97,10 @@ class ofApp : public ofBaseApp{
     
         ofSoundPlayer  sound[N_SOUNDS];
     
-        ofTrueTypeFont    verdana;
+        ofTrueTypeFont verdana;
+
+		ofxPanel gui;
+		ofParameter<int>  dif;
+		ofParameter<int>  totalGames;
     
 };
